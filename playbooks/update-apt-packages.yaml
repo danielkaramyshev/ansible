@@ -44,3 +44,12 @@
       tags:
         - packages
         - reboot_required
+
+    
+    - name: Print reboot required message
+      debug:
+        msg: "Reboot is required but not allowed"
+      when: ansible_os_family == 'Debian' and reboot_required_file.stat.exists == true and reboot_allowed is not defined
+      tags:
+        - packages
+        - reboot_required
