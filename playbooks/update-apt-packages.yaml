@@ -48,10 +48,28 @@
         - reboot_required
 
     # debugmsg with skip_reboot
-    - name: Reboot required
+    - name: skip_reboot is defined
       debug:
-        msg: "Reboot allowed"
+        msg: "skip_reboot is defined"
+      when: skip_reboot is defined
+      tags:
+        - packages
+        - reboot_required
+
+    # debugmsg with skip_reboot
+    - name: skip_reboot is false
+      debug:
+        msg: "skip_reboot is false"
       when: skip_reboot is defined and skip_reboot == false
+      tags:
+        - packages
+        - reboot_required
+
+    # debugmsg value of skip_reboot
+    - name: skip_reboot value
+      debug:
+        msg: "skip_reboot value is {{ skip_reboot }}"
+      when: skip_reboot is defined
       tags:
         - packages
         - reboot_required
