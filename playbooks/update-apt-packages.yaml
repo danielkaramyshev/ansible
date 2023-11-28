@@ -36,11 +36,11 @@
       tags:
         - packages
         - reboot_required
-      when: ansible_os_family == 'Debian' and skip_reboot exists and skip_reboot == false
+      when: ansible_os_family == 'Debian' and skip_reboot is defined and skip_reboot == false
 
     - name: Reboot the server
       reboot:
-      when: reboot_required_file.stat.exists == true and skip_reboot exists and skip_reboot == false
+      when: reboot_required_file.stat.exists == true and skip_reboot is defined and skip_reboot == false
       tags:
         - packages
         - reboot_required
