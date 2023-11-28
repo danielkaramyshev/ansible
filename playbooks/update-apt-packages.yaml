@@ -60,7 +60,7 @@
     - name: skip_reboot is false
       debug:
         msg: "skip_reboot is false"
-      when: skip_reboot is defined and skip_reboot == false
+      when: skip_reboot is defined and skip_reboot == 0
       tags:
         - packages
         - reboot_required
@@ -76,7 +76,7 @@
 
     - name: Reboot the server
       reboot:
-      when: ansible_os_family == 'Debian' and reboot_required_file.stat.exists == true and skip_reboot is defined and skip_reboot == false
+      when: ansible_os_family == 'Debian' and reboot_required_file.stat.exists == true and skip_reboot is defined and skip_reboot == 0
       tags:
         - packages
         - reboot_required
