@@ -38,6 +38,24 @@
         - reboot_required
       when: ansible_os_family == 'Debian'
 
+    # debugmsg if reboot is required
+    - name: Reboot required
+      debug:
+        msg: "Reboot required"
+      when: ansible_os_family == 'Debian' and reboot_required_file.stat.exists == true
+      tags:
+        - packages
+        - reboot_required
+
+    # debugmsg with skip_reboot
+    - name: Reboot required
+      debug:
+        msg: "Reboot allowed"
+      when: skip_reboot is defined and skip_reboot == false
+      tags:
+        - packages
+        - reboot_required
+
     - name: Reboot the server
       reboot:
       when: ansible_os_family == 'Debian' and reboot_required_file.stat.exists == true and skip_reboot is defined and skip_reboot == false
