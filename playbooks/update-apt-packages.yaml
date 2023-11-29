@@ -20,15 +20,6 @@
         - packages
       when: ansible_os_family == 'Debian'
 
-    - name: Install base packages
-      ansible.builtin.apt:
-        name: "{{ item }}"
-        state: present
-      with_items: "{{ install_packages }}"
-      tags:
-        - packages
-      when: ansible_os_family == 'Debian'
-
     - name: Check if reboot required
       stat:
         path: /var/run/reboot-required
@@ -44,7 +35,6 @@
       tags:
         - packages
         - reboot_required
-
     
     - name: Print reboot required message
       debug:
