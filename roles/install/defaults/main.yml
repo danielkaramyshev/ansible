@@ -1,0 +1,23 @@
+---
+# defaults file for install
+install_packages:
+  - sudo
+  - curl
+  - software-properties-common
+  - curl
+  - wget
+  - nano
+  - htop
+  - iptables
+  - zip
+  - unzip
+  - apt-transport-https
+  - gnupg2
+  - tmux
+  - git
+  - python3-pip
+  - tmux
+  - rsync
+  - ncdu
+  - iftop
+  - losf
