@@ -1,3 +1,5 @@
 ---
 # vars file for install
 smallstep_cli_deb: "https://dl.smallstep.com/gh-release/cli/gh-release-header/v0.25.1/step-cli_0.25.1_amd64.deb"
+smallstep_pki_url: "https://pki.helity.de"
+smallstep_pki_fingerprint: "99a75fed8d36f91b2d71d1c03c9de44d33561772a81ccdd923db030bbe6d5596"
