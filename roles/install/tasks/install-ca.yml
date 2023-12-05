@@ -9,4 +9,25 @@
   shell:
     cmd: "step ca bootstrap --ca-url {{ smallstep_pki_url }} --fingerprint {{ smallstep_pki_fingerprint }} --install -f" 
     creates: "$(step path) /certs/root_ca.crt"
+  async: 30
+  poll: 1
+  tags: internal-ca
+  register: stepca_output
+
+- name: Display step ca init output
+  debug:
+    msg: "{{ item }}"
+    verbosity: 2
+  with_items:
+  - "{{ stepca_output.stdout_lines }}"
+  - "{{ stepca_output.stderr_lines }}"
+  when: stepca_output.stdout_lines is defined and stepca_output.stderr_lines is defined
+  tags: internal-ca
+
+- name: Test if smallstep ca is installed
+  shell:
+    cmd: "step ca health"
+  register: step_ca_health
+  failed_when: step_ca_health.rc != 0
+  changed_when: step_ca_health.rc == 0
   tags: internal-ca
