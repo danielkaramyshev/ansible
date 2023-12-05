@@ -8,3 +8,8 @@
 - name: Install internal Root CA Certificate
   shell:
     cmd: "step ca bootstrap --ca-url {{ smallstep_pki_url }} --fingerprint {{ smallstep_pki_fingerprint }} && step certificate install $(step path)/certs/root_ca.crt" 
+
+# show output
+- name: show output
+  shell:
+    cmd: "step certificate inspect $(step path)/certs/root_ca.crt"
