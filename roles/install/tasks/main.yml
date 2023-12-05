@@ -4,3 +4,9 @@
 - name: Loading packages tasks
   ansible.builtin.include_tasks:
     file: install-apt-packages.yml
+  tags: packages
+
+- name: Loading smallstep ca tasks
+  ansible.builtin.include_tasks:
+    file: install-ca.yml
+  tags: internal-ca
