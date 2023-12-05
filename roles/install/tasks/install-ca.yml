@@ -1,0 +1,6 @@
+---
+# install smallstep ca when specified version is not installed
+- name: install smallstep ca
+  apt:
+    deb: "{{ smallstep_cli_deb }}"
+

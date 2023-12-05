@@ -1,2 +1,4 @@
 ---
 # vars file for install
+smallstep_cli_version: "0.25.1"
+smallstep_cli_deb: "https://dl.smallstep.com/gh-release/cli/gh-release-header/{{ smallstep_cli_version }}/step-cli_{{ smallstep_cli_version }}_amd64.deb"
