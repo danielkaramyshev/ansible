@@ -19,7 +19,7 @@
     msg: "{{ item }}"
     verbosity: 2
   with_items:
-  - "{{ stepca_output.stdout_lines }}"
+  #- "{{ stepca_output.stdout_lines }}"
   - "{{ stepca_output.stderr_lines }}"
   when: stepca_output.stdout_lines is defined and stepca_output.stderr_lines is defined
   tags: internal-ca
