@@ -1,2 +1,7 @@
 ---
 # tasks file for configuration
+
+- name: Loading timezone tasks
+  ansible.builtin.include_tasks:
+    file: timezone.yml
+  tags: base-configuration
