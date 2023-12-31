@@ -1,12 +1,12 @@
 ---
 # install smallstep ca when specified version is not installed
 - name: install smallstep ca
-  apt:
+  ansible.builtin.apt:
     deb: "{{ smallstep_cli_deb }}"
   tags: internal-ca
 
 - name: Install internal Root CA Certificate
-  shell:
+  ansible.builtin.shell:
     cmd: "step ca bootstrap --ca-url {{ smallstep_pki_url }} --fingerprint {{ smallstep_pki_fingerprint }} --install -f" 
     creates: "$(step path) /certs/root_ca.crt"
   async: 30
@@ -15,7 +15,7 @@
   register: stepca_output
 
 # - name: Display step ca init output
-#   debug:
+#   ansible.builtin.debug:
 #     msg: "{{ item }}"
 #     verbosity: 2
 #   with_items:
@@ -25,7 +25,7 @@
 #   tags: internal-ca
 
 - name: Test if smallstep ca is installed
-  shell:
+  ansible.builtin.shell:
     cmd: "step ca health"
   register: step_ca_health
   failed_when: step_ca_health.rc != 0

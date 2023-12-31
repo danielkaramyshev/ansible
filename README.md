@@ -15,6 +15,9 @@ Simple git repository for saving ansible playbooks which I use.
 - Maintenance
     - [x] Check diskspace
 
-
 - Configuration
+    - [ ] Set timezone UTC (or as configured)
+    - [ ] Set syslog server
+
+
 
