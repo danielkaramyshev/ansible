@@ -23,13 +23,7 @@
     - restart rsyslog
   tags: syslog
 
-- name: restart rsyslog
-  ansible.builtin.service:
-    name: rsyslog
-    state: restarted
-  tags: syslog
-
-# check if docker is installed, if so, configure the docker daemon to send all container logs to the remote syslog server
+# Docker Part
 - name: Check if docker is installed
   ansible.builtin.package:
     name: docker-ce
@@ -48,9 +42,5 @@
   notify:
     - restart docker
   tags: syslog,syslog_docker
+  ignore_errors: true
 
-- name: restart docker
-  ansible.builtin.service:
-    name: docker
-    state: restarted
-  tags: syslog,syslog_docker
