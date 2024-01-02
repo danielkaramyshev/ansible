@@ -1,2 +1,13 @@
 ---
 # handlers file for configuration
+- name: restart rsyslog
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted
+  tags: syslog
+
+- name: restart docker
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  tags: syslog,syslog_docker

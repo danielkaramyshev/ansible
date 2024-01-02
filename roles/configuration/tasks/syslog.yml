@@ -3,12 +3,14 @@
   ansible.builtin.package:
     name: rsyslog
     state: present
+  tags: syslog
 
 - name: Check if rsyslog is enabled and started
   ansible.builtin.service:
     name: rsyslog
     enabled: yes
     state: started
+  tags: syslog
 
 - name: Configure rsyslog with template
   ansible.builtin.template:
@@ -19,9 +21,36 @@
     mode: 0644
   notify:
     - restart rsyslog
+  tags: syslog
 
 - name: restart rsyslog
   ansible.builtin.service:
     name: rsyslog
     state: restarted
+  tags: syslog
 
+# check if docker is installed, if so, configure the docker daemon to send all container logs to the remote syslog server
+- name: Check if docker is installed
+  ansible.builtin.package:
+    name: docker-ce
+    state: present
+  register: docker_installed
+  tags: syslog,syslog_docker
+
+- name: Configure docker daemon to send logs to remote syslog server
+  ansible.builtin.template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+  when: docker_installed is defined and docker_installed is success
+  notify:
+    - restart docker
+  tags: syslog,syslog_docker
+
+- name: restart docker
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  tags: syslog,syslog_docker
