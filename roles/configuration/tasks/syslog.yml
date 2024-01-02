@@ -1,0 +1,27 @@
+---
+- name: Check if rsyslog is installed
+  ansible.builtin.package:
+    name: rsyslog
+    state: present
+
+- name: Check if rsyslog is enabled and started
+  ansible.builtin.service:
+    name: rsyslog
+    enabled: yes
+    state: started
+
+- name: Configure rsyslog with template
+  ansible.builtin.template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.d/60-remote.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart rsyslog
+
+- name: restart rsyslog
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted
+

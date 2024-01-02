@@ -5,3 +5,8 @@
   ansible.builtin.include_tasks:
     file: timezone.yml
   tags: base-configuration
+
+- name: Loading syslog tasks
+  ansible.builtin.include_tasks:
+    file: syslog.yml
+  tags: syslog
